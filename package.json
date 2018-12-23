@@ -4,5 +4,12 @@
   "main": "index.js",
   "repository": "https://github.com/AksshatGupta/ToDoList.git",
   "author": "Aksshat Gupta",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "start" : "node index.js",
+    "dev" : "nodemon bin/www index.js"
+  },
+  "dependencies": {
+    "express": "^4.16.4"
+  }
 }
