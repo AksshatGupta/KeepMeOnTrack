@@ -47,6 +47,7 @@ function addListItem() {
   parsedList.push(newListItem);
   var stringifiedList = JSON.stringify(parsedList);
   setCookie("list", stringifiedList, 365);
+  renderList();
   //console.warn(JSON.parse(getCookie("list")));
 }
 
@@ -83,14 +84,24 @@ function deleteCookie(cname) {
   document.cookie = cname + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 }
 
+function renderList() {
+  var list = getCookie("list");
+  var parsedList = JSON.parse(list);
+  $("#render-list").html("");
+  $.each(parsedList, function(index, object){
+    $("#render-list").prepend(object.value);
+    //console.warn(index, object.value);
+  });
+}
+
 $(function() {
   initList();
-  $("#render-list").html(getCookie("list"));
+  renderList();
   $("#submit").on("click", addListItem)
   $("#delete").on("click", function() {
     // var cname = $(this).data("cookie");
     // deleteCookie(cname);
     setCookie("list", "[]", 365);
-    $("#render-list").html(getCookie("list"));
+    renderList();
   })
 });
