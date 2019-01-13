@@ -20,18 +20,6 @@ function getCookie(cname) {
   return "";
 }
 
-// function checkCookie() {
-//   var user = getCookie("list");
-//   if (user != "") {
-//     alert("Welcome again " + user);
-//   } else {
-//     user = prompt("Please enter your name:", "");
-//     if (user != "" && user != null) {
-//       setCookie("list", user, 365);
-//     }
-//   }
-// }
-
 function getUTCDate() {
   var date = new Date();
   var now_utc =  Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(),
@@ -70,18 +58,39 @@ function createListItem() {
   return listItem;
 }
 
-// function setListItem() {
-//   var listItem = $("#list-item-entry").val();
-//   setCookie("list", listItem, 365);
-//   $("#render-list").html(getCookie("list"));
+// function strike(cname) {
+//   setCookie("list", getCookie(cname).strike(), 365);
 // }
-
-function strike(cname) {
-  setCookie("list", getCookie(cname).strike(), 365);
-}
 
 function deleteCookie(cname) {
   document.cookie = cname + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+  location.reload();
+}
+
+function strike() {
+  var id = $(this).attr("data-id");
+  var list = getCookie("list");
+  var parsedList = JSON.parse(list);
+  var foundItem = parsedList.find(function(item) {
+    return item.id === id;
+  })
+  foundItem.strike = true;
+  var stringifiedList = JSON.stringify(parsedList);
+  setCookie("list", stringifiedList, 365);
+  renderList();
+}
+
+function deleteItem() {
+  var id = $(this).attr("data-id");
+  var list = getCookie("list");
+  var parsedList = JSON.parse(list);
+  var foundItem = parsedList.find(function(item) {
+    return item.id === id;
+  })
+  foundItem = null;
+  var stringifiedList = JSON.stringify(parsedList.filter(Boolean));
+  setCookie("list", stringifiedList, 365);
+  renderList();
 }
 
 function renderList() {
@@ -89,7 +98,11 @@ function renderList() {
   var parsedList = JSON.parse(list);
   $("#render-list").html("");
   $.each(parsedList, function(index, object){
-    $("#render-list").prepend(object.value);
+    var item = $("<a>").html(object.value).addClass("item").attr("data-id", object.id).addClass(object.strike ? "strike" : null);
+    var createdAt = $("<span>").html(object.createdAt);
+    var deleteButton = $("<button>").html(object.id).addClass("delete-item");
+    var li = $("<li>").prepend(item, createdAt, deleteButton);
+    $("#render-list").prepend(li);
     //console.warn(index, object.value);
   });
 }
@@ -97,11 +110,19 @@ function renderList() {
 $(function() {
   initList();
   renderList();
-  $("#submit").on("click", addListItem)
+  $("#list-item-creator").on("submit", function(event) {
+    event.preventDefault();
+    addListItem();
+  })
+  $('#render-list').on('click', '.item', strike)
+  $('#render-list').on('click', '.delete-item', deleteItem)
   $("#delete").on("click", function() {
     // var cname = $(this).data("cookie");
     // deleteCookie(cname);
     setCookie("list", "[]", 365);
     renderList();
+  })
+  $("#perm").on("click", function() {
+    deleteCookie("list")
   })
 });

@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>HTML5 boilerplate – all you really need…</title>
+    <title>To Do List</title>
+    <link href="https://fonts.googleapis.com/css?family=Staatliches" rel="stylesheet">
     <link rel="stylesheet" href="static/css/style.css">
     <!--[if IE]>
         <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -10,12 +11,13 @@
 </head>
 
 <body id="home">
-
-    <input id="list-item-entry" type="text" name="List" value="">
-    <button id="submit" type="button" name="Submit">Add Item</button>
+    <form id="list-item-creator">
+      <input id="list-item-entry" type="text" name="List" value="">
+      <button id="submit" type="submit" name="Submit">Add Item</button>
+    </form>
     <button id="delete" type="button" name="Delete" data-cookie="list">Delete</button>
-    <!-- <button id="delete" type="button" name="Perm" data-cookie="list">Delete List</button> -->
-    <p id="render-list"></p>
+    <button id="perm" type="button" name="Perm" data-cookie="list">Delete List</button>
+    <ul id="render-list"></ul>
     <script
       src="https://code.jquery.com/jquery-3.3.1.min.js"
       integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
