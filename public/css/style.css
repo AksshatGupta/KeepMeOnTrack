@@ -11,8 +11,22 @@ body {
   color: rgb(10, 60, 170);
 }
 .strike {
-  text-decoration: line-through;
+  text-decoration: line-through !important;
 }
 .hidden {
-  display: none;
+  display: none !important;
+}
+.created-at {
+  min-width: 100px;
+  text-align: center;
+}
+.item {
+  min-width: 100px;
+  text-align: center;
+}
+.truncate {
+  width: 100px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

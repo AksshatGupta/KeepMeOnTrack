@@ -99,18 +99,26 @@ function renderList() {
   var parsedList = JSON.parse(list);
   $("#render-list").html("");
   $.each(parsedList, function(index, object){
+    var createdAtMoment = moment(object.createdAt, 'MMMM Do YYYY, h:mm:ss a').fromNow();
     var item = $("<a>")
       .html(object.value)
-      .addClass("item")
+      .addClass("item truncate")
       .attr("data-id", object.id)
       .addClass(object.strike ? "strike" : null);
-    var createdAt = $("<span>").html($("<span>").html(moment(object.createdAt, 'MMMM Do YYYY, h:mm:ss a').fromNow()));
+    var createdAt = $("<div>")
+      .addClass("created-at truncate")
+      .html($("<span>")
+      .html(createdAtMoment));
+    //<button type="button" class="btn btn-danger"><i class="fas fa-dumpster-fire"></i></button>
     var deleteButton = $("<button>")
-      .html("Delete")
+      .html("<i class=\"fas fa-dumpster-fire\"></i>")
       .attr("data-id", object.id)
-      .addClass("delete-item");
+      .addClass("delete-item btn btn-danger");
     //var deleteButton = $("<button>").html("Delete").addClass(object.delete ? "delete-item" : null);
-    var li = $("<li>").addClass(object.archived ? "hidden" : null).prepend(item, deleteButton, createdAt);
+    var li = $("<li>")
+      .addClass(object.archived ? "hidden" : null)
+      .addClass("list-group-item d-flex justify-content-around align-items-center ")
+      .prepend(item, createdAt, deleteButton);
     //var li = $("<li>").addClass(object.archived ? "hidden" : null).prepend(item, deleteButton);
     $("#render-list").prepend(li);
     //console.warn(index, object.value);
