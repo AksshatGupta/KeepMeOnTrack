@@ -20,13 +20,13 @@ function getCookie(cname) {
   return "";
 }
 
-function getUTCDate() {
-  var date = new Date();
-  var now_utc =  Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(),
-   date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds());
-
-  return now_utc;
-}
+// function getUTCDate() {
+//   var date = new Date();
+//   var now_utc =  Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(),
+//    date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds());
+//
+//   return now_utc;
+// }
 
 function addListItem() {
   var list = getCookie("list"),
@@ -51,8 +51,9 @@ function createListItem() {
   var value = $("#list-item-entry").val();
   var listItem = {
     value: value,
-    createdAt: getUTCDate(),
+    createdAt: moment().format('MMMM Do YYYY, h:mm:ss a'),
     strike: false,
+    archived: false,
     id: Math.random().toString(36).substring(7),
   }
   return listItem;
@@ -74,7 +75,7 @@ function strike() {
   var foundItem = parsedList.find(function(item) {
     return item.id === id;
   })
-  foundItem.strike = true;
+  foundItem.strike = !foundItem.strike;
   var stringifiedList = JSON.stringify(parsedList);
   setCookie("list", stringifiedList, 365);
   renderList();
@@ -87,8 +88,8 @@ function deleteItem() {
   var foundItem = parsedList.find(function(item) {
     return item.id === id;
   })
-  foundItem = null;
-  var stringifiedList = JSON.stringify(parsedList.filter(Boolean));
+  foundItem.archived = true;
+  var stringifiedList = JSON.stringify(parsedList);
   setCookie("list", stringifiedList, 365);
   renderList();
 }
@@ -98,10 +99,19 @@ function renderList() {
   var parsedList = JSON.parse(list);
   $("#render-list").html("");
   $.each(parsedList, function(index, object){
-    var item = $("<a>").html(object.value).addClass("item").attr("data-id", object.id).addClass(object.strike ? "strike" : null);
-    var createdAt = $("<span>").html(object.createdAt);
-    var deleteButton = $("<button>").html(object.id).addClass("delete-item");
-    var li = $("<li>").prepend(item, createdAt, deleteButton);
+    var item = $("<a>")
+      .html(object.value)
+      .addClass("item")
+      .attr("data-id", object.id)
+      .addClass(object.strike ? "strike" : null);
+    var createdAt = $("<span>").html($("<span>").html(moment(object.createdAt, 'MMMM Do YYYY, h:mm:ss a').fromNow()));
+    var deleteButton = $("<button>")
+      .html("Delete")
+      .attr("data-id", object.id)
+      .addClass("delete-item");
+    //var deleteButton = $("<button>").html("Delete").addClass(object.delete ? "delete-item" : null);
+    var li = $("<li>").addClass(object.archived ? "hidden" : null).prepend(item, deleteButton, createdAt);
+    //var li = $("<li>").addClass(object.archived ? "hidden" : null).prepend(item, deleteButton);
     $("#render-list").prepend(li);
     //console.warn(index, object.value);
   });
