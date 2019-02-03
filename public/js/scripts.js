@@ -48,7 +48,7 @@ function initList() {
 }
 
 function createListItem() {
-  var value = $("#list-item-entry").val();
+  var value = $("#list-item-entry").val().trim();
   var listItem = {
     value: value,
     createdAt: moment().format('MMMM Do YYYY, h:mm:ss a'),
@@ -130,7 +130,14 @@ $(function() {
   renderList();
   $("#list-item-creator").on("submit", function(event) {
     event.preventDefault();
+    var entry = $("#list-item-entry");
+    var value = entry.val().trim();
+    if(value.length === 0) {
+      alert("Enter a valid value!");
+      return false;
+    }
     addListItem();
+    entry.val("");
   })
   $('#render-list').on('click', '.item', strike)
   $('#render-list').on('click', '.delete-item', deleteItem)

@@ -42,11 +42,11 @@
 
       <div class="collapse navbar-collapse" id="navbarColor01">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="/">List <span class="sr-only">(current)</span></a>
-          </li>
           <li class="nav-item">
-            <a class="nav-link" href="/settings">Settings</a>
+            <a class="nav-link" href="/">List</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/settings">Settings <span class="sr-only">(current)</span></a>
           </li>
         </ul>
       </div>
@@ -55,31 +55,8 @@
     <div class="container" id="root">
       <div class="row">
         <div class="col">
-          <div class="jumbotron">
-            <!-- <h1 class="display-3">Hello, world!</h1>
-            <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-            <hr class="my-4">
-            <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-            <p class="lead">
-              <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
-            </p> -->
-
-            <form class="row" id="list-item-creator">
-              <div class="col col-sm-10">
-                  <div class="form-group">
-                    <input class="form-control form-control-lg" id="list-item-entry" type="text" placeholder="Add Item" required>
-                  </div>
-              </div>
-              <div class="col col-sm-2">
-                <button class="btn btn-success btn-lg btn-block" id="submit" type="submit" name="Submit"><i class="far fa-plus-square"></i></button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <ul id="render-list" class="list-group"></ul>
+          <button id="delete" type="button" name="Delete" data-cookie="list"><i class="fas fa-trash-alt"></i></button>
+          <button id="perm" type="button" name="Perm" data-cookie="list">Delete List</button>
         </div>
       </div>
     </div>
