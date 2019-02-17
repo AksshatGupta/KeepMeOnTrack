@@ -43,8 +43,82 @@ function initList() {
   var list = getCookie("list");
   if(list.length === 0) {
     setCookie("list", "[]", 365);
-    console.warn("Initialized");
+    console.warn("List Initialized");
   }
+}
+
+function setFontName(fontName) {
+  setCookie("fontName", fontName, 365);
+}
+
+function initFontName() {
+  var fontName = getCookie("fontName");
+  if(fontName.length === 0) {
+    setCookie("fontName", "staatliches", 365);
+    console.warn("Font Name Initialized");
+  }
+  changeFontName(fontName);
+}
+
+function changeFontName(fontName) {
+  clearFonts();
+  switch (fontName) {
+    case "staatliches":
+      $("body").addClass("font-staatliches")
+      break;
+    case "titillium":
+      $("body").addClass("font-titillium-web")
+      break;
+    case "merienda":
+      $("body").addClass("font-merienda")
+      break;
+    default:
+      $("body").addClass("font-staatliches")
+  }
+}
+
+function clearFonts() {
+  var fontClasses = ["font-staatliches", "font-titillium-web", "font-merienda"];
+  $.each(fontClasses, function(i, v) {
+    $("body").removeClass(v);
+  });
+}
+
+function setFontSize(fontSize) {
+  setCookie("fontSize", fontSize, 365);
+}
+
+function initFontSize() {
+  var fontSize = getCookie("fontSize");
+  if(fontSize.length === 0) {
+    setCookie("fontSize", "12", 365);
+    console.warn("Font Size Initialized");
+  }
+  changeFontSize(parseInt(fontSize));
+}
+
+function changeFontSize(fontSize) {
+  clearFontSize();
+  switch (fontSize) {
+    case 12:
+      $("body").addClass("font-size-12")
+      break;
+    case 18:
+      $("body").addClass("font-size-18")
+      break;
+    case 24:
+      $("body").addClass("font-size-24")
+      break;
+    default:
+      $("body").addClass("font-size-12")
+  }
+}
+
+function clearFontSize() {
+  var fontClasses = ["font-size-12", "font-size-18", "font-size-24"];
+  $.each(fontClasses, function(i, v) {
+    $("body").removeClass(v);
+  });
 }
 
 function createListItem() {
@@ -126,6 +200,8 @@ function renderList() {
 }
 
 $(function() {
+  initFontName();
+  initFontSize();
   initList();
   renderList();
   $("#list-item-creator").on("submit", function(event) {
@@ -141,6 +217,16 @@ $(function() {
   })
   $('#render-list').on('click', '.item', strike)
   $('#render-list').on('click', '.delete-item', deleteItem)
+  $('.change-font').on('click', function() {
+    var fontName = $(this).data("font-name");
+    setFontName(fontName);
+    changeFontName(fontName);
+  })
+  $('.change-font-size').on('click', function() {
+    var fontSize = $(this).data("font-size");
+    setFontSize(fontSize);
+    changeFontSize(fontSize);
+  })
   $("#delete").on("click", function() {
     // var cname = $(this).data("cookie");
     // deleteCookie(cname);
@@ -148,6 +234,8 @@ $(function() {
     renderList();
   })
   $("#perm").on("click", function() {
-    deleteCookie("list")
+    deleteCookie("list");
+    deleteCookie("fontName");
+    deleteCookie("fontSize");
   })
 });
