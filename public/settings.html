@@ -16,7 +16,7 @@
     <![endif]-->
 </head>
 
-<body id="home">
+<body id="setting">
     <!-- <form id="list-item-creator">
       <input id="list-item-entry" type="text" name="List" value="">
       <button id="submit" type="submit" name="Submit">Add Item</button>
@@ -55,8 +55,82 @@
     <div class="container" id="root">
       <div class="row">
         <div class="col">
-          <button id="delete" type="button" name="Delete" data-cookie="list"><i class="fas fa-trash-alt"></i></button>
-          <button id="perm" type="button" name="Perm" data-cookie="list">Delete List</button>
+          <div class="jumbotron">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">Type</th>
+                  <th scope="col">Profile</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="table-info">
+                  <th scope="row">Name</th>
+                  <td>Column content</td>
+                </tr>
+                </tbody>
+            </table>
+          </div>
+          <div class="jumbotron">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">Type</th>
+                  <th scope="col">Text Manupilation</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="table-dark">
+                  <th scope="row">Font</th>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">(current)
+                      </button>
+                      <div class="dropdown-menu dropdown-menu-right">
+                        <button class="dropdown-item-font-staatliches" type="button">Staatliches</button>
+                        <button class="dropdown-item-font-titillium-web" type="button  ">Titillium Web</button>
+                        <button class="dropdown-item-font-merienda" type="button">Merienda</button>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="table-dark">
+                  <th scope="row">Size</th>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">(current)
+                      </button>
+                      <div class="dropdown-menu dropdown-menu-right">
+                        <button class="dropdown-item-size-12" type="button">12</button>
+                        <button class="dropdown-item-size-18" type="button  ">18</button>
+                        <button class="dropdown-item-size-24" type="button">24</button>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="jumbotron">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">Type</th>
+                  <th scope="col">List</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="table-warning">
+                  <th scope="row">Delete List</th>
+                  <td><button id="delete" type="button" name="Delete" data-cookie="list"><i class="fas fa-trash-alt"></i></button></td>
+                </tr>
+                <tr class="table-danger">
+                  <th scope="row">Reinitialize</th>
+                  <td><button id="perm" type="button" name="Perm" data-cookie="list"><i class="fas fa-redo-alt"></i></button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
