@@ -16,7 +16,7 @@
     <![endif]-->
 </head>
 
-<body id="home" class="font-staatliches">
+<body id="setting" class="font-staatliches">
     <!-- <form id="list-item-creator">
       <input id="list-item-entry" type="text" name="List" value="">
       <button id="submit" type="submit" name="Submit">Add Item</button>
@@ -42,11 +42,11 @@
 
       <div class="collapse navbar-collapse" id="navbarColor01">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="/">List <span class="sr-only">(current)</span></a>
-          </li>
           <li class="nav-item">
-            <a class="nav-link" href="/settings">Settings</a>
+            <a class="nav-link" href="/">List</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/settings">Settings <span class="sr-only">(current)</span></a>
           </li>
         </ul>
       </div>
@@ -56,30 +56,81 @@
       <div class="row">
         <div class="col">
           <div class="jumbotron">
-            <!-- <h1 class="display-3">Hello, world!</h1>
-            <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-            <hr class="my-4">
-            <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-            <p class="lead">
-              <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
-            </p> -->
-
-            <form class="row" id="list-item-creator">
-              <div class="col col-sm-10">
-                  <div class="form-group">
-                    <input class="form-control form-control-lg" id="list-item-entry" type="text" autocomplete="off" placeholder="Add Item" required>
-                  </div>
-              </div>
-              <div class="col col-sm-2">
-                <button class="btn btn-success btn-lg btn-block" id="submit" type="submit" name="Submit"><i class="far fa-plus-square"></i></button>
-              </div>
-            </form>
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">Type</th>
+                  <th scope="col">Profile</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="table-info">
+                  <th scope="row">Name</th>
+                  <td>Column content</td>
+                </tr>
+                </tbody>
+            </table>
           </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <ul id="render-list" class="list-group"></ul>
+          <div class="jumbotron">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">Type</th>
+                  <th scope="col">Text Manupilation</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="table-dark">
+                  <th scope="row">Font</th>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">(current)
+                      </button>
+                      <div class="dropdown-menu dropdown-menu-right">
+                        <button class="font-staatliches dropdown-item change-font" type="button" data-font-name="staatliches">Staatliches</button>
+                        <button class="font-titillium-web dropdown-item change-font" type="button" data-font-name="titillium">Titillium Web</button>
+                        <button class="font-merienda dropdown-item change-font" type="button" data-font-name="merienda">Merienda</button>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="table-dark">
+                  <th scope="row">Size</th>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">(current)
+                      </button>
+                      <div class="dropdown-menu dropdown-menu-right">
+                        <button class="font-size-12 dropdown-item change-font-size" type="button" data-font-size="12">12</button>
+                        <button class="font-size-18 dropdown-item change-font-size" type="button" data-font-size="18">18</button>
+                        <button class="font-size-24 dropdown-item change-font-size" type="button" data-font-size="24">24</button>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="jumbotron">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">Type</th>
+                  <th scope="col">List</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="table-warning">
+                  <th scope="row">Delete List</th>
+                  <td><button id="delete" type="button" name="Delete" data-cookie="list"><i class="fas fa-trash-alt"></i></button></td>
+                </tr>
+                <tr class="table-danger">
+                  <th scope="row">Reinitialize</th>
+                  <td><button id="perm" type="button" name="Perm" data-cookie="list"><i class="fas fa-redo-alt"></i></button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
